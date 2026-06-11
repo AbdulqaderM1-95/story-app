@@ -95,7 +95,7 @@ export default function StoryForm({ onStory, setIsLoading, isLoading }: Props) {
           "X-Title": "Bedtime Story Magic",
         },
         body: JSON.stringify({
-          model: "openai/gpt-4o-mini",
+          model: "openai/gpt-oss-120b:free",
           stream: true,
           messages: [
             {
@@ -197,7 +197,7 @@ Guidelines:
           {/* Name + Age */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className={LABEL}>Child's Name</label>
+              <label className={LABEL}>Child&apos;s Name</label>
               <input
                 type="text"
                 value={name}
@@ -207,7 +207,7 @@ Guidelines:
               />
             </div>
             <div>
-              <label className={LABEL}>Child's Age</label>
+              <label className={LABEL}>Child&apos;s Age</label>
               <select
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
