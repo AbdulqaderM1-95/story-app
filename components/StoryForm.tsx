@@ -59,17 +59,13 @@ export default function StoryForm({ onStory, setIsLoading, isLoading }: Props) {
   const [age, setAge] = useState("");
   const [dayDesc, setDayDesc] = useState("");
   const [theme, setTheme] = useState<ThemeId | "">("");
-  const [apiKey, setApiKey] = useState("");
   const [error, setError] = useState("");
-
-  const envKey = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
-  const needsApiKey = !envKey;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const key = envKey || apiKey.trim();
-    if (!key) { setError("Please enter your OpenRouter API key."); return; }
+    const key = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
+    if (!key) { setError("API key not configured."); return; }
     if (!name.trim()) { setError("Please enter the child's name."); return; }
     if (!age) { setError("Please select the child's age."); return; }
     if (dayDesc.trim().length < 10) {
@@ -170,30 +166,6 @@ Guidelines:
         </h2>
 
         <div className="space-y-5">
-          {/* API Key */}
-          {needsApiKey && (
-            <div>
-              <label className={LABEL}>
-                OpenRouter API Key{" "}
-                <a
-                  href="https://openrouter.ai/keys"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-purple-400 hover:text-purple-300 underline text-xs ml-1"
-                >
-                  (get one free)
-                </a>
-              </label>
-              <input
-                type="password"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder="sk-or-..."
-                className={INPUT}
-              />
-            </div>
-          )}
-
           {/* Name + Age */}
           <div className="grid grid-cols-2 gap-4">
             <div>
